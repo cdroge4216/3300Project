@@ -16,3 +16,17 @@ Non-Functional Requirements:
 2.	Must complete all transactions in less than 5 seconds
 3.	Basic encryption of customer’s personal information
 
+
+TODO:
+Delete Accounts (Williams)
+Intrist based on date (Caleb)
+Logins (Diaz)
+Encryption on .dat file (Noah)
+logs (Hand)
+bank statement (Hand)
+ATM GUI (Caleb, Noah)
+Fix Withdrawl (everyone eyes on)
+
+Extras:
+make teller a gui (Williams)
+make entire project a .exe
