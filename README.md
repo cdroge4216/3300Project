@@ -19,7 +19,7 @@ Non-Functional Requirements:
 
 TODO:
 Delete Accounts (Williams)
-Intrist based on date (Caleb)
+!!FINISHED!!Intrist based on date (Caleb)
 Logins (Diaz)
 Encryption on .dat file (Noah)
 logs (Hand)
