@@ -25,12 +25,18 @@ public class TellerMain
 
 	static Scanner scan = new Scanner(System.in);
 	
+	//number of variables that are used over serveral methods
+	static String dateStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+	static String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+	static String lastDate = null;
+	
 	//*************************************
 	//Main Method
 	//*************************************
 	public static void main(String[ ] args) throws IOException
 		{
-		System.out.println(LocalDateTime.now());
+		//System.out.println(LocalDateTime.now());
+		System.out.println(dateStamp);
 		/*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		String timeStampYear = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 		System.out.println(timeStamp);
@@ -72,6 +78,9 @@ public class TellerMain
 		System.out.println(accountList.length);*/
 		//sorts the accounts based on account number 
 		sort();
+		
+		//checks to see if interest needs to be paid
+		interest();
 		
 		//prints teller menu
 		printMenu();
@@ -144,9 +153,9 @@ public class TellerMain
 					break;
 					
 			 //Pays interest on Savings accounts and applies interest on loans
-			 case 9:
-				 	//interest();
-					break;
+			/* case 9:
+				 	interest();
+					break;*/
 				
 			 default:
 				 System.out.println("Sorry, invalid choice");
@@ -201,7 +210,7 @@ public class TellerMain
 		System.out.println("6: Create a new Checking Account (will create a required savings account).");
 		System.out.println("7: Create a new Savings Account (requires a checking account).");
 		System.out.println("8: Create a new Loan (requires a checking and savings account).");
-		System.out.println("9: Pays interest on Savings accounts and applies interest on loans (only do on the first of the month!).");
+		//System.out.println("9: Pays interest on Savings accounts and applies interest on loans (only do on the first of the month!).");
 		System.out.print("\nEnter your choice: ");
 	}
 		
@@ -1572,6 +1581,52 @@ public class TellerMain
 		//prints new balance for the account
 		 System.out.println("The new balance for this loan account is:");
 		System.out.println(accountList[sortNum].getBalance());
+	}
+	
+	public static void interest()
+	{
+		System.out.println(dateStamp);
+		int option = 0;
+		
+		if (dateStamp != lastDate)
+		{
+			if (dateStamp.charAt(4) == 0 && dateStamp.charAt(5) == 1 && dateStamp.charAt(6) == 0 
+					&& dateStamp.charAt(7) == 1)
+			{
+				System.out.println("Would you like to apply the yearly interrest? \"1\" for yes or \"0\" for no?");
+				option = scan.nextInt();
+				
+				if (option == 1)
+				{
+					lastDate = dateStamp;
+					for(int i = 0; i < accountList.length; i++)
+					{
+						//determines type of account
+						if(accountList[i].getAccountType() == 1)
+						{
+						
+						}
+						
+						if(accountList[i].getAccountType() == 2)
+						{
+							System.out.println("Initial Balance: " + accountList[i].getBalance());
+							accountList[i].setBalance(accountList[i].getBalance() * 
+									((Savings) accountList[i]).getInterest());
+							System.out.println("Final Balance: " + accountList[i].getBalance());
+						}
+						
+						if(accountList[i].getAccountType() == 3)
+						{
+							System.out.println("Initial Balance: " + accountList[i].getBalance());
+							accountList[i].setBalance(accountList[i].getBalance() * 
+									((Loans) accountList[i]).getRate());
+							System.out.println("Final Balance: " + accountList[i].getBalance());
+						}
+								
+					}
+				}
+			}
+		}
 	}
 	
 }

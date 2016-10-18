@@ -2,7 +2,7 @@ package application;
 
 public class Loans extends Account
 {
-	double rate;
+	double rate = 1.05;
 	int checkingAccountNumber;
 	int numLoansAccounts;
 	
