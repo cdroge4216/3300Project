@@ -142,12 +142,12 @@ public class Loans extends Account
 	//prints basic account info
 	public String toString()
 	{
-		return (super.toString() + "; Account Type: Savings");
+		return (super.toString() + "; Account Type: Loan");
 	}
 	
 	public String smallString()
 	{
-		return (super.smallString() + "; Account Type: Savings");
+		return (super.smallString() + "; Account Type: Loan");
 	}
 	
 	//deposits and withdraws money from the account
@@ -161,6 +161,11 @@ public class Loans extends Account
 	{
 		super.withdraw(ammount);
 		
+	}
+
+	public void setNumLoansAccounts(int number) 
+	{
+		numLoansAccounts = number;
 	}
 }
 

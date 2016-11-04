@@ -152,10 +152,15 @@ public class TellerMain
 				 	sort();
 					break;
 					
-			 //Pays interest on Savings accounts and applies interest on loans
-			/* case 9:
-				 	interest();
-					break;*/
+			 //deletes a Loan
+			 case 9:
+				 	deleteLoan();
+					break;
+				
+			//deletes a savings account
+			 case 10:
+				 	deleteSavings();
+					break;		
 				
 			 default:
 				 System.out.println("Sorry, invalid choice");
@@ -210,7 +215,8 @@ public class TellerMain
 		System.out.println("6: Create a new Checking Account (will create a required savings account).");
 		System.out.println("7: Create a new Savings Account (requires a checking account).");
 		System.out.println("8: Create a new Loan (requires a checking and savings account).");
-		//System.out.println("9: Pays interest on Savings accounts and applies interest on loans (only do on the first of the month!).");
+		System.out.println("9: Deletes a Loan");
+		System.out.println("10: Deletes a Savings Account");
 		System.out.print("\nEnter your choice: ");
 	}
 		
@@ -500,22 +506,21 @@ public class TellerMain
 					AT = 1;
 				}
 					
-				for(int j = 1 ; j < 6; j ++)
+				if(accountList[i].getAccountType() == 2)
 				{
-					if(accountList[i].getAccountType() == 2)
-					{
-						AT = 2;
-					}
+					AT = 2;
+				}
+			
+				if(accountList[i].getAccountType() == 3)
+				{
+					AT = 3;
+				}
+			
+				if(accountList[i].getAccountType() == 4)
+				{
+					AT = 4;
 				}
 				
-				for(int j = 6 ; j < 10; j ++)
-				{
-					if(accountList[i].getAccountType() == 3)
-					{
-						AT = 3;
-					}
-				}	
-								
 				System.out.println(AT);
 					
 				//prints checking
@@ -1270,7 +1275,7 @@ public class TellerMain
 			//}
 			//if (cont.charAt(0) == 'Y' || cont.charAt(0) == 'y')
 			//{
-				withdraw();
+				//withdraw();
 			//}
 		}
 		
@@ -1629,4 +1634,157 @@ public class TellerMain
 		}
 	}
 	
+	public static void deleteLoan()
+	{
+		int accountNumber = 0;
+		int sortNum = 0;
+		boolean realAccount = false;
+		String cont = "no";
+		int checking = 0;
+		int checkingNum = 0;
+		
+		System.out.println("Please enter the account number of the loan you would like to delete.");
+		accountNumber = scan.nextInt();
+		
+		//looks for all info related to the account number
+		for(int i = 0; i < sortList.length; i++)
+		{
+			if (accountNumber == sortList[i])
+			{
+				sortNum = i;
+				realAccount = true;
+			}
+		}
+		
+		//makes sure account exist
+		if(realAccount == false)
+		{
+			System.out.println("The account number you entered does not exist");
+		}
+		
+		//makes sure account is a loan
+		if(realAccount == true && accountList[sortNum].getAccountType() != 3)
+		{
+			System.out.println("The account you entered is not a loan; please enter a loan account number");
+			realAccount = false;
+		}
+		
+		//gets confirmation that the user wants to delete the account
+		if (realAccount == true)
+		{
+			System.out.println("Please confirm that you want to delete this account:");
+			accountList[sortNum].toString();
+			System.out.println("Type \"yes\" to continue or \"no\" to stop account deletion.");
+			cont = scan.nextLine();
+			cont = scan.nextLine();
+			
+			if (cont.contains("N") || cont.contains("n"))
+			{
+				realAccount = false;
+			}
+		}
+		
+		if (realAccount == true)
+		{
+			//Adjust other accounts to show deleted account
+			checking = ((Loans)accountList[sortNum]).getCheckingAccountNumber();
+			
+			for(int i = 0; i < sortList.length; i++)
+			{
+				if (checking == sortList[i])
+				{
+					checkingNum = i;
+				}
+			}
+		
+			((Checking)accountList[checkingNum]).setNumLoansAccounts(
+					((Checking)accountList[checkingNum]).getNumLoansAccounts() - 1);
+			
+
+			//clears array list
+			accountList[sortNum] = new DeletedAccount(null, 0, null, null, null, null, 0, 4, 0); 
+			sortList[sortNum] = 0;
+			
+			System.out.println("!The account is now deleted!");
+			
+		}
+	}
+	
+	public static void deleteSavings()
+	{
+		int accountNumber = 0;
+		int sortNum = 0;
+		boolean realAccount = false;
+		String cont = "no";
+		int checking = 0;
+		int checkingNum = 0;
+		
+		System.out.println("Please enter the account number of the savings account"
+				+ " you would like to delete.");
+		accountNumber = scan.nextInt();
+		
+		//looks for all info related to the account number
+		for(int i = 0; i < sortList.length; i++)
+		{
+			if (accountNumber == sortList[i])
+			{
+				sortNum = i;
+				realAccount = true;
+			}
+		}
+		
+		//makes sure account exist
+		if(realAccount == false)
+		{
+			System.out.println("The account number you entered does not exist");
+		}
+		
+		//makes sure account is a loan
+		if(realAccount == true && accountList[sortNum].getAccountType() != 2)
+		{
+			System.out.println("The account you entered is not a savings account; "
+					+ "please enter a loan account number");
+			realAccount = false;
+		}
+		
+		//gets confirmation that the user wants to delete the account
+		if (realAccount == true)
+		{
+			System.out.println("Please confirm that you want to delete this account:");
+			accountList[sortNum].toString();
+			System.out.println("Type \"yes\" to continue or \"no\" to stop account deletion.");
+			cont = scan.nextLine();
+			cont = scan.nextLine();
+			
+			if (cont.contains("N") || cont.contains("n"))
+			{
+				realAccount = false;
+			}
+		}
+		
+		if (realAccount == true)
+		{
+			//Adjust other accounts to show deleted account
+			checking = ((Savings)accountList[sortNum]).getCheckingAccountNumber();
+			
+			for(int i = 0; i < sortList.length; i++)
+			{
+				if (checking == sortList[i])
+				{
+					checkingNum = i;
+				}
+			}
+		
+			((Checking)accountList[checkingNum]).setNumSavingsAccounts(
+					((Checking)accountList[checkingNum]).getNumSavingsAccounts() - 1);
+			
+			
+			//clears array list
+			accountList[sortNum] = new DeletedAccount(null, 0, null, null, null, null, 0, 4, 0); 
+			sortList[sortNum] = 0;
+			
+			System.out.println("!The account is now deleted!");
+			
+		}
+	}
 }
