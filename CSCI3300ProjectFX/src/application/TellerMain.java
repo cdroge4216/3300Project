@@ -160,7 +160,12 @@ public class TellerMain
 			//deletes a savings account
 			 case 10:
 				 	deleteSavings();
-					break;		
+					break;	
+					
+			//deletes a savings account
+			 case 11:
+				 	deleteChecking();
+					break;			
 				
 			 default:
 				 System.out.println("Sorry, invalid choice");
@@ -217,6 +222,7 @@ public class TellerMain
 		System.out.println("8: Create a new Loan (requires a checking and savings account).");
 		System.out.println("9: Deletes a Loan");
 		System.out.println("10: Deletes a Savings Account");
+		System.out.println("11: Deletes a Checking Account and all attached accounts for that customer");
 		System.out.print("\nEnter your choice: ");
 	}
 		
@@ -939,6 +945,8 @@ public class TellerMain
 		System.out.println(accountList[(accountList.length-2)].toString());
 		System.out.println(accountList[(accountList.length-1)].toString());
 		
+		sort();
+		
 		}
 	}
 	
@@ -1044,7 +1052,7 @@ public class TellerMain
 				accountList[checking].getDOB(), accountList[checking].getMemberSince(),
 				accountList[checking].getPin(), 2, (checkingNumber + accounts + 1), checkingNumber, (accounts + 1));
 		
-		sortList[(accountList.length-1)] = (checking + accounts + 1); 
+		sortList[(accountList.length-1)] = (checkingNumber + accounts + 1); 
 		
 		//Updates attached checking account to show the proper amount of savings accounts
 		((Checking) accountList[checking]).setNumSavingsAccounts(((Checking) accountList[checking]).
@@ -1054,6 +1062,7 @@ public class TellerMain
 		System.out.println("Below is the account infor for the new account:");
 		System.out.println(accountList[(accountList.length-1)].toString());
 		
+		sort();
 	}
 	
 	//*********************************************************************************************
@@ -1178,6 +1187,8 @@ public class TellerMain
 		System.out.println(accountList[checking].getBalance() - balance);
 		System.out.println("Below is the new balance for the attached checking acccount:");
 		System.out.println(accountList[checking].getBalance());
+		
+		sort();
 		
 	}
 	
@@ -1785,6 +1796,87 @@ public class TellerMain
 			
 			System.out.println("!The account is now deleted!");
 			
+		}
+	}
+	
+	public static void deleteChecking()
+	{
+		int accountNumber = 0;
+		int sortNum = 0;
+		int lowerSortNum = 0;
+		boolean realAccount = false;
+		String cont = "no";
+		int checking = 0;
+		
+		System.out.println("Please enter the account number of the checking account"
+				+ " you would like to delete.");
+		accountNumber = scan.nextInt();
+		
+		//looks for all info related to the account number
+		for(int i = 0; i < sortList.length; i++)
+		{
+			if (accountNumber == sortList[i])
+			{
+				sortNum = i;
+				realAccount = true;
+			}
+		}
+		
+		//makes sure account exist
+		if(realAccount == false)
+		{
+			System.out.println("The account number you entered does not exist");
+		}
+		
+		//makes sure account is a checking account
+		if(realAccount == true && accountList[sortNum].getAccountType() != 1)
+		{
+			System.out.println("The account you entered is not a checking account; "
+					+ "please enter a loan account number");
+			realAccount = false;
+		}
+		
+		//gets confirmation that the user wants to delete the account
+		if (realAccount == true)
+		{
+			System.out.println("Please confirm that you want to delete this account? "
+					+ "!THIS WILL DELETE ALL ATACHED ACCOUNTS!:");
+			accountList[sortNum].toString();
+			System.out.println("Type \"yes\" to continue or \"no\" to stop account deletion.");
+			cont = scan.nextLine();
+			cont = scan.nextLine();
+			
+			if (cont.contains("N") || cont.contains("n"))
+			{
+				realAccount = false;
+			}
+		}
+		
+		if (realAccount == true)
+		{
+			//looks for and deletes all accounts attached to checking 
+			for(int i = (accountNumber + 1); i <= (accountNumber + 9); i++)
+			{
+				System.out.println("i" + i);
+				for(int j = 0; j < sortList.length; j++)
+				{
+					System.out.println("j" + j);
+					if (i == sortList[j])
+					{
+						lowerSortNum = j;
+						System.out.println("lsn" + lowerSortNum);
+					}
+				}
+				
+				System.out.println(accountList[lowerSortNum].smallString());
+				accountList[lowerSortNum] = new DeletedAccount(null, 0, null, null, null, null, 0, 4, 0); 
+				sortList[lowerSortNum] = 0;
+				System.out.println(accountList[lowerSortNum].smallString());
+			}
+			
+			//deletes checking
+			accountList[sortNum] = new DeletedAccount(null, 0, null, null, null, null, 0, 4, 0); 
+			sortList[sortNum] = 0;
 		}
 	}
 }
