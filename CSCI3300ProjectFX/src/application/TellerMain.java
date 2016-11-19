@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import controller.MainController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 public class TellerMain 
 {
 	//*************************************
@@ -82,6 +88,7 @@ public class TellerMain
 		//checks to see if interest needs to be paid
 		interest();
 		
+		
 		//prints teller menu
 		printMenu();
 		int choice = scan.nextInt();
@@ -94,7 +101,7 @@ public class TellerMain
 		
 		//writes all account info to accounts.dat apon closing the program
 		writer();
-		}
+	}
 	
 	//***********************************************************
 	//controls menu options, routes options to correct methods

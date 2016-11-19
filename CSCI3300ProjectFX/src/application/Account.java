@@ -34,6 +34,11 @@ public class Account
 		numberAccounts = numberaccounts;
 	}
 	
+	public static void staticSetNumberAccounts(int numberaccounts)
+	{
+		numberAccounts = numberaccounts;
+	}
+	
 	public void setAccountNumber(int accountnumber)
 	{
 		accountNumber = accountnumber;
@@ -79,7 +84,12 @@ public class Account
 		accountType = accounttype;
 	}
 	
-	public int getnumberAccounts() 
+	public static int staticGetnumberAccounts() 
+	{
+		return numberAccounts;
+	}
+	
+	public  int getnumberAccounts() 
 	{
 		return numberAccounts;
 	}

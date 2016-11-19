@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Entrance" onMouseEntered="#in" prefHeight="616.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <BorderPane layoutY="2.0" prefHeight="616.0" prefWidth="590.0">
+         <center>
+            <GridPane prefHeight="528.0" prefWidth="543.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.5" minWidth="0.0" prefWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="502.0" minWidth="10.0" prefWidth="502.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="0.0" prefWidth="0.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="170.0" minHeight="0.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="441.0" minHeight="10.0" prefHeight="429.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="168.5" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="25.0" prefWidth="502.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="NextButton" layoutX="398.0" layoutY="1.0" mnemonicParsing="false" onAction="#ClickNext" prefHeight="72.0" prefWidth="90.0" text="Next">
+                           <font>
+                              <Font name="Comic Sans MS" size="24.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="14.0" layoutY="20.0" text="Acount Number:" />
+                        <Label layoutX="14.0" layoutY="55.0" text="PIN:" />
+                        <Label fx:id="AccountNumberText" layoutX="249.0" layoutY="20.0" text=" " />
+                        <Label fx:id="PINText" layoutX="247.0" layoutY="64.0" text=" " />
+                        <Button fx:id="ClearButton" layoutX="398.0" layoutY="72.0" mnemonicParsing="false" onAction="#ClickClear" prefHeight="54.0" prefWidth="90.0" text="Clear">
+                           <font>
+                              <Font name="Comic Sans MS" size="24.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <GridPane prefHeight="432.0" prefWidth="509.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button fx:id="Num5" mnemonicParsing="false" onAction="#Click5" prefHeight="145.0" prefWidth="170.0" text="5">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button fx:id="Num4" mnemonicParsing="false" onAction="#Click4" prefHeight="144.0" prefWidth="170.0" text="4">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Button fx:id="Num2" layoutY="-1.0" mnemonicParsing="false" onAction="#Click2" prefHeight="146.0" prefWidth="170.0" text="2">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="Num1" alignment="CENTER" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#Click1" prefHeight="146.0" prefWidth="171.0" text="1" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <Button fx:id="Num3" layoutX="-1.0" layoutY="-3.0" mnemonicParsing="false" onAction="#Click3" prefHeight="148.0" prefWidth="171.0" text="3">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button fx:id="Num6" mnemonicParsing="false" onAction="#Click6" prefHeight="145.0" prefWidth="169.0" text="6">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button fx:id="Num9" layoutY="-1.0" mnemonicParsing="false" onAction="#Click9" prefHeight="146.0" prefWidth="170.0" text="9">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button fx:id="Num8" layoutY="1.0" mnemonicParsing="false" onAction="#Click8" prefHeight="143.0" prefWidth="170.0" text="8">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button fx:id="Num7" mnemonicParsing="false" onAction="#Click7" prefHeight="144.0" prefWidth="170.0" text="7">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="60.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="48.0" prefWidth="580.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <AnchorPane layoutY="-4.0" prefHeight="56.0" prefWidth="510.0">
+                           <children>
+                              <Button fx:id="Num0" layoutX="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#Click0" prefHeight="56.0" prefWidth="510.0" text="0">
+                                 <font>
+                                    <Font name="Comic Sans MS" size="26.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
