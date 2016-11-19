@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="TellerChoice" onMouseEntered="#in" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <BorderPane prefHeight="409.0" prefWidth="408.0">
+         <top>
+            <AnchorPane prefHeight="48.0" prefWidth="408.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="122.0" layoutY="16.0" text="Please choose an option below" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <GridPane prefHeight="331.0" prefWidth="408.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="NewCheckingButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ClickNewChecking" text="New Checking" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="DepositButton" layoutX="81.0" layoutY="14.0" mnemonicParsing="false" onAction="#ClickDeposit" text="Deposit/ Pay Loan" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="NewSavingsButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#ClickNewSavings" text="New Savings" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="TellerWithdrawButton" layoutX="124.0" layoutY="14.0" mnemonicParsing="false" onAction="#ClickTellerWithdraw" text="Withdraw" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="NewLoanButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#ClickNewLoan" text="New Loan" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="TellerChoiceView" layoutX="85.0" layoutY="14.0" mnemonicParsing="false" onAction="#TellerChoiceClickView" text="View an Account" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Button fx:id="DeleteButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ClickDelete" text="Delete Account" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Button fx:id="LogOutButton" layoutX="134.0" layoutY="14.0" mnemonicParsing="false" onAction="#ClickLogOut" text="LogOut" />
+                     </children></AnchorPane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

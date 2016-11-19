@@ -10,6 +10,7 @@ public class Checking extends Account
 			int numloansaccounts) 
 	{
 		super(name, balance, ssn, address, dob, membersince, pin, accounttype, accountnumber);
+		System.out.println(super.getnumberAccounts());
 		super.setNumberAccounts(super.getnumberAccounts() + 10);
 		setAccountNumber(super.getnumberAccounts());
 		super.setAccountType(1);
