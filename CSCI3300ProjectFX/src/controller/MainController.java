@@ -13,6 +13,7 @@ import java.util.Scanner;
 import application.Account;
 import application.Checking;
 import application.DeletedAccount;
+import application.Employee;
 import application.Loans;
 import application.MainFXApp;
 import application.Savings;
@@ -35,8 +36,8 @@ public class MainController
 	private MainFXApp main;
 	
 	boolean PINTruth = false;
-	boolean CorrectPIN = false;
-	boolean CorrectPassCode = false;
+	static boolean CorrectPIN = false;
+	static boolean CorrectPassCode = false;
 	static boolean FirstEntrance = true;
 	boolean newAccountError = true;
 	boolean booleanCheckingBalance = false;
@@ -49,6 +50,8 @@ public class MainController
 	static int checkingNumber = 999;
 	static int [] sortList = new int[0];
 	
+	static int [] employeeSortList = new int[0];
+	
 	static String accountNumberString, pinString, name, address, memberDate, dateOfBirth; 
 	static String pinStringHidden = " ";
 	
@@ -57,6 +60,7 @@ public class MainController
 	static String lastDate = null;
 	
 	static Account[] accountList = new Account[0];
+	static Employee[] employeeList = new Employee[0];
 
 	static Scanner scan = new Scanner(System.in);
 	
@@ -149,6 +153,7 @@ public class MainController
 		root = FXMLLoader.load(getClass().getResource("/view/TellerLogIn.fxml"));
 		scene = new Scene(root);
 		stage.setScene(scene);
+		FirstEntrance = true;
 	}
 	
 	public void ClickATM(ActionEvent event) throws Exception
@@ -163,6 +168,16 @@ public class MainController
 	//***********************************************************************************************************
 	//TellerLogIn
 	//***********************************************************************************************************
+	public void TellerLogInIn() throws IOException
+	{
+		if (FirstEntrance == true)
+		{
+			System.out.println(dateStamp);
+			FirstEntrance = false;
+			
+			EmployeeReader();
+		}
+	}
 	
 	public void ClickLogIn(ActionEvent event) throws Exception
 	{
@@ -171,7 +186,8 @@ public class MainController
 		System.out.println(employeeID);
 		System.out.println(passCode);
 		
-		CorrectPassCode = true;
+		//CorrectPassCode = true;
+		checkPasscode(employeeID, passCode);
 		//!!DIAZ!! CHECK PASSCODE METHOD HERE. Return to CorrectPassCode true or false
 		
 		if (CorrectPassCode == true)
@@ -184,6 +200,7 @@ public class MainController
 				employeeID = 0;
 				passCode = 0;
 				CorrectPassCode = false;
+				FirstEntrance = true;
 			}
 	}
 
@@ -1018,7 +1035,9 @@ public class MainController
 		else if (PINTruth == true && CorrectPIN == false)
 		{
 			//!!DIAZ!! CHECK PIN METHOD HERE. Return to CorrectPIN true or false
-			CorrectPIN = true;
+			CheckPIN(pin, accountNumber);
+			//CorrectPIN = true;
+			System.out.println(CorrectPIN);
 		}
 		
 		if (CorrectPIN == true)
@@ -1493,4 +1512,137 @@ public class MainController
 			accountList[min] = TEMP;
 		}
 	}
+	//*******************************
+	//Compares the user enter pin to check if pin is correct or not
+	//*******************************
+	public static boolean CheckPIN(int p, int a)
+	{
+		int checkPin = p;
+		int checkAccountNumber = a;
+		int correctPin;
+		
+		for(int i = 0; i < sortList.length; i++)
+		{
+			if (checkAccountNumber == sortList[i])
+			{
+				//System.out.println();
+				checkingNumber = i;
+			}
+		}
+		
+		correctPin = accountList[checkingNumber].getPin();
+		if (checkPin == correctPin)
+		{
+			return CorrectPIN = true;
+		}
+		
+		else
+		{
+			return CorrectPIN = false;
+		}
+		
+	}
+	
+	//********************************************
+	//Reads in employee info
+	//********************************************
+	public static void EmployeeReader() throws IOException
+	{
+		int IdNumber = 100, Passcode,	EmployeeType;
+		employeeList = new Employee[0];
+		employeeSortList = new int[0];
+		boolean contID = true;
+		
+		
+		Scanner scan = new Scanner(new File("employees.dat"));
+		
+		//while(contID == true)
+		//{
+			IdNumber = scan.nextInt(); 
+			System.out.println("ID" + IdNumber);
+			IdNumber = scan.nextInt();
+			if (IdNumber == 0)
+					{
+						contID = false;
+					}
+			
+			Passcode = scan.nextInt();
+			System.out.println("Passcode" + Passcode);
+			
+			EmployeeType = scan.nextInt();
+			System.out.println("Type" + EmployeeType);
+			
+			//makes room for new account
+			Employee[] temp = new Employee[employeeList.length+1];
+				
+			for(int i = 0; i < employeeList.length; i++)
+			{
+				temp[i] = employeeList[i];
+			}
+				
+			employeeList = new Employee [temp.length];
+				
+			for(int i = 0; i < employeeList.length; i++)
+			{
+				employeeList[i] = temp[i];
+			}
+				
+			int[] tempS = new int[employeeSortList.length+1];
+				
+			for(int i = 0; i < employeeSortList.length; i++)
+			{
+				tempS[i] = employeeSortList[i];
+			}
+				
+			employeeSortList = new int[tempS.length];
+				
+			for(int i = 0; i < employeeSortList.length; i++)
+			{
+				employeeSortList[i] = tempS[i];
+			}
+			
+			employeeList[employeeList.length - 1] = new Employee(IdNumber, Passcode, EmployeeType);
+			
+			employeeSortList[employeeList.length - 1] = employeeList[employeeList.length - 1].getIdNumber();
+			
+			System.out.println("ID" + employeeList[employeeList.length - 1].getIdNumber());
+			System.out.println("Passcode" + employeeList[employeeList.length - 1].getPasscode());
+			System.out.println("Type" + employeeList[employeeList.length - 1].getEmployeeType());
+		//}
+	}
+	
+	//*******************************
+	//Compares the user enter passcode to check if passcode is correct or not
+	//*******************************
+	public static boolean checkPasscode(int p, int a)
+	{
+		int checkPass = a;
+		int checkIdNumber = p;
+		int correctPass;
+		int ID = 100;
+		
+		for(int i = 0; i < sortList.length; i++)
+		{
+			System.out.println(checkIdNumber);
+			System.out.println(employeeSortList[i]);
+			if (checkIdNumber == employeeSortList[i])
+			{
+				
+				ID = i;
+			}
+		}
+		
+		correctPass = employeeList[ID].getPasscode();
+		if (checkPass == correctPass)
+		{
+			return CorrectPassCode = true;
+		}
+		
+		else
+		{
+			return CorrectPassCode = false;
+		}
+		
+	}
+	
 }
