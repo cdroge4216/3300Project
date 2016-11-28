@@ -121,8 +121,8 @@
          <bottom>
             <AnchorPane prefHeight="64.0" prefWidth="790.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="NewSavingsConfirmCancel" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#NewCheckingClickConfirmCancel" text="Cancel" />
-                  <Button fx:id="NewSavingsConfirm" layoutX="724.0" layoutY="20.0" mnemonicParsing="false" onAction="#NewCheckingClickConfirm" text="Confirm" />
+                  <Button fx:id="NewSavingsConfirmCancel" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#NewSavingsClickConfirmCancel" text="Cancel" />
+                  <Button fx:id="NewSavingsConfirm" layoutX="724.0" layoutY="20.0" mnemonicParsing="false" onAction="#NewSavingsClickConfirm" text="Confirm" />
                </children>
             </AnchorPane>
          </bottom>
