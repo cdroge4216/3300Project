@@ -13,7 +13,6 @@ import java.util.Scanner;
 import application.Account;
 import application.Checking;
 import application.DeletedAccount;
-import application.Employee;
 import application.Loans;
 import application.MainFXApp;
 import application.Savings;
@@ -36,8 +35,8 @@ public class MainController
 	private MainFXApp main;
 	
 	boolean PINTruth = false;
-	static boolean CorrectPIN = false;
-	static boolean CorrectPassCode = false;
+	boolean CorrectPIN = false;
+	boolean CorrectPassCode = false;
 	static boolean FirstEntrance = true;
 	boolean newAccountError = true;
 	boolean booleanCheckingBalance = false;
@@ -50,8 +49,6 @@ public class MainController
 	static int checkingNumber = 999;
 	static int [] sortList = new int[0];
 	
-	static int [] employeeSortList = new int[0];
-	
 	static String accountNumberString, pinString, name, address, memberDate, dateOfBirth; 
 	static String pinStringHidden = " ";
 	
@@ -60,7 +57,6 @@ public class MainController
 	static String lastDate = null;
 	
 	static Account[] accountList = new Account[0];
-	static Employee[] employeeList = new Employee[0];
 
 	static Scanner scan = new Scanner(System.in);
 	
@@ -100,6 +96,17 @@ public class MainController
 	@FXML Button NewSavingsConfirmCancel, NewSavingsConfirm;
 	@FXML Label SavingsConfirmAccountNumber, SavingsConfirmBalance;
 	@FXML Label SavingsConfirmName, SavingsConfirmSSN, SavingsConfirmDOB, SavingsConfirmAddress, SavingsConfirmMemberDate, SavingsConfirmPIN;
+	
+	//TellerNewLoan
+	@FXML Button NewLoanBackButton, NewLoansEnterButton;
+	@FXML TextField NewLoanSLB, NewLoanCAN, NewLoanInterest;
+	@FXML Label NewLoanSSBError, NewLoanCANError;
+		
+	//TellerNewLoanConfirm
+	@FXML Button NewLoanConfirmCancel, NewLoansConfirm;
+	@FXML Label LoanConfirmAccountNumber, LoanConfirmBalance;
+	@FXML Label LoanConfirmName, LoanConfirmSSN, LoansConfirmDOB, LoanConfirmAddress, LoanConfirmMemberDate, LoanConfirmPIN;
+	@FXML Label	LoanConfirmInterest;
 	
 	//ATMEntance
 	@FXML Label AccountNumberText, PINText;
@@ -153,7 +160,6 @@ public class MainController
 		root = FXMLLoader.load(getClass().getResource("/view/TellerLogIn.fxml"));
 		scene = new Scene(root);
 		stage.setScene(scene);
-		FirstEntrance = true;
 	}
 	
 	public void ClickATM(ActionEvent event) throws Exception
@@ -168,16 +174,6 @@ public class MainController
 	//***********************************************************************************************************
 	//TellerLogIn
 	//***********************************************************************************************************
-	public void TellerLogInIn() throws IOException
-	{
-		if (FirstEntrance == true)
-		{
-			System.out.println(dateStamp);
-			FirstEntrance = false;
-			
-			EmployeeReader();
-		}
-	}
 	
 	public void ClickLogIn(ActionEvent event) throws Exception
 	{
@@ -186,8 +182,7 @@ public class MainController
 		System.out.println(employeeID);
 		System.out.println(passCode);
 		
-		//CorrectPassCode = true;
-		checkPasscode(employeeID, passCode);
+		CorrectPassCode = true;
 		//!!DIAZ!! CHECK PASSCODE METHOD HERE. Return to CorrectPassCode true or false
 		
 		if (CorrectPassCode == true)
@@ -200,7 +195,6 @@ public class MainController
 				employeeID = 0;
 				passCode = 0;
 				CorrectPassCode = false;
-				FirstEntrance = true;
 			}
 	}
 
@@ -693,6 +687,7 @@ public class MainController
 				SavingsConfirmAddress.setText(address);
 				SavingsConfirmMemberDate.setText(memberDate);
 				SavingsConfirmPIN.setText(Integer.toString(pin));
+				
 			}
 			
 			else 
@@ -776,6 +771,222 @@ public class MainController
 		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 
 		root = FXMLLoader.load(getClass().getResource("/view/TellerNewSavings.fxml"));
+		scene = new Scene(root);
+		stage.setScene(scene);
+		FirstEntrance = true;
+	}
+	
+	//***********************************************************************************************************
+	//TellerNewLoan
+	//***********************************************************************************************************
+	
+	public void NewLoanClickBack(ActionEvent event) throws Exception
+	{
+		writer();
+		
+		
+		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+		root = FXMLLoader.load(getClass().getResource("/view/TellerChoice.fxml"));
+		scene = new Scene(root);
+		stage.setScene(scene);
+		FirstEntrance = true;
+	}
+	
+	public void NewLoanClickEnter(ActionEvent event) throws Exception
+	{
+		
+		newAccountError = false;
+				
+		//inputs and error Checks User Data
+		//checkingAccountNumber
+		try
+		{
+			NewSavingsCANError.setText(" " );
+			checkingAccountNumber = Integer.parseInt(NewSavingsCAN.getText());
+		}
+		catch(java.util.InputMismatchException e)
+		{
+			NewSavingsCANError.setText("Please enter the account number using the correct format: ##" );
+			newAccountError = true;
+		}
+		catch(java.lang.NumberFormatException e)
+		{
+			NewSavingsCANError.setText("Please enter the account number using the correct format: ##" );
+			newAccountError = true;
+		}
+		finally
+		{
+			
+		}
+		
+		//Savings Balance
+		try
+		{
+			NewSavingsSSBError.setText(" " );
+			savingsBalance = Integer.parseInt(NewSavingsSSB.getText());
+		}
+		catch(java.util.InputMismatchException e)
+		{
+			NewSavingsSSBError.setText("Please enter the balance using the correct format: ##.##" );
+			newAccountError = true;
+		}
+		catch(java.lang.NumberFormatException e)
+		{
+			NewSavingsSSBError.setText("Please enter the balance using the correct format: ##.##" );
+			newAccountError = true;
+		}
+		finally
+		{
+			
+		}
+					
+			
+		if (newAccountError == false)
+		{
+			for(int i = 0; i < accountList.length; i++)
+			{
+				System.out.println(accountList[i].smallString());
+			}
+			writer();
+			
+			
+			stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+	
+			root = FXMLLoader.load(getClass().getResource("/view/TellerNewSavingsConfirm.fxml"));
+			scene = new Scene(root);
+			stage.setScene(scene);
+			FirstEntrance = true;
+		}
+	}
+	
+	//***********************************************************************************************************
+	//TellerNewSavingsConfirm
+	//***********************************************************************************************************
+	
+	public void TellerNewLoanConfirmInitial() throws IOException
+	{
+		
+		if (FirstEntrance == true)
+		{
+			in();
+			checkingNumber = 999;
+		//	System.out.println(checkingAccountNumber);
+			
+			//checks to see if checking account number is real
+			//looks for all info related to the account number
+			for(int i = 0; i < sortList.length; i++)
+			{
+				//System.out.println(sortList[i]);
+				if (checkingAccountNumber == sortList[i])
+				{
+					checkingNumber = i;
+				}
+				//System.out.println(checkingNumber);
+			}
+			
+			if (checkingNumber != 999)
+			{
+				//collects info from checking
+				name = accountList[checkingNumber].getName();
+				socialSecurityNumber = Integer.parseInt(accountList[checkingNumber].getSSN()); 
+				address = accountList[checkingNumber].getAddress();
+				dateOfBirth = accountList[checkingNumber].getDOB(); 
+				memberDate = accountList[checkingNumber].getMemberSince();
+				pin = accountList[checkingNumber].getPin();
+				int accounts = ((Checking)accountList[checkingNumber]).getNumSavingsAccounts();
+				
+				SavingsConfirmAccountNumber.setText(Integer.toString(checkingAccountNumber + accounts + 1));
+				SavingsConfirmBalance.setText(Integer.toString(savingsBalance));
+				SavingsConfirmName.setText(name);
+				SavingsConfirmSSN.setText(Integer.toString(socialSecurityNumber));
+				SavingsConfirmDOB.setText(dateOfBirth);
+				SavingsConfirmAddress.setText(address);
+				SavingsConfirmMemberDate.setText(memberDate);
+				SavingsConfirmPIN.setText(Integer.toString(pin));
+				
+			}
+			
+			else 
+			{
+				SavingsConfirmAccountNumber.setText("The Checking account number does not exist.");
+				SavingsConfirmBalance.setText("Please hit \"Cancel\" and try again.");
+			}
+		}
+	}
+	
+	public void NewLoanClickConfirm(ActionEvent event) throws Exception
+	{
+		
+		//creates new accounts
+		//makes room for new account
+		//makes room for new account
+		Account[] temp = new Account[accountList.length+1];
+		
+		for(int i = 0; i < accountList.length; i++)
+		{
+			temp[i] = accountList[i];
+		}
+		
+		accountList = new Account[temp.length];
+		
+		for(int i = 0; i < accountList.length; i++)
+		{
+			accountList[i] = temp[i];
+		}
+		
+		int[] tempS = new int[sortList.length+1];
+		
+		for(int i = 0; i < sortList.length; i++)
+		{
+			tempS[i] = sortList[i];
+		}
+		
+		sortList = new int[tempS.length];
+		
+		for(int i = 0; i < sortList.length; i++)
+		{
+			sortList[i] = tempS[i];
+		}
+		
+		
+		//creates new Savings
+		accountList[(accountList.length-1)] = new Savings(name, 
+				savingsBalance, Integer.toString(socialSecurityNumber), address, dateOfBirth, memberDate, pin, 2,
+				(checkingAccountNumber + (((Checking)accountList[checkingNumber]).getNumSavingsAccounts()) + 1), 
+				checkingAccountNumber, ((((Checking)accountList[checkingNumber]).getNumSavingsAccounts()) + 1));
+		
+		sortList[(accountList.length-1)] = 
+				(checkingAccountNumber + (((Checking)accountList[checkingNumber]).getNumSavingsAccounts()) + 1); 
+		
+		//Updates attached checking account to show the proper amount of savings accounts
+		((Checking) accountList[checkingNumber]).setNumSavingsAccounts(((Checking) accountList[checkingNumber]).
+				getNumSavingsAccounts() + 1);
+		
+		//Prints Info for the new account
+		System.out.println("Below is the account infor for the new account:");
+		System.out.println(accountList[(accountList.length-1)].toString());
+		
+		sort();
+		
+		writer();
+		
+		
+		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+		root = FXMLLoader.load(getClass().getResource("/view/TellerChoice.fxml"));
+		scene = new Scene(root);
+		stage.setScene(scene);
+		FirstEntrance = true;
+	}
+	
+	public void NewLoanClickConfirmCancel(ActionEvent event) throws Exception
+	{
+		writer();
+		
+		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+		root = FXMLLoader.load(getClass().getResource("/view/TellerNewLoan.fxml"));
 		scene = new Scene(root);
 		stage.setScene(scene);
 		FirstEntrance = true;
@@ -1035,9 +1246,7 @@ public class MainController
 		else if (PINTruth == true && CorrectPIN == false)
 		{
 			//!!DIAZ!! CHECK PIN METHOD HERE. Return to CorrectPIN true or false
-			CheckPIN(pin, accountNumber);
-			//CorrectPIN = true;
-			System.out.println(CorrectPIN);
+			CorrectPIN = true;
 		}
 		
 		if (CorrectPIN == true)
@@ -1512,137 +1721,4 @@ public class MainController
 			accountList[min] = TEMP;
 		}
 	}
-	//*******************************
-	//Compares the user enter pin to check if pin is correct or not
-	//*******************************
-	public static boolean CheckPIN(int p, int a)
-	{
-		int checkPin = p;
-		int checkAccountNumber = a;
-		int correctPin;
-		
-		for(int i = 0; i < sortList.length; i++)
-		{
-			if (checkAccountNumber == sortList[i])
-			{
-				//System.out.println();
-				checkingNumber = i;
-			}
-		}
-		
-		correctPin = accountList[checkingNumber].getPin();
-		if (checkPin == correctPin)
-		{
-			return CorrectPIN = true;
-		}
-		
-		else
-		{
-			return CorrectPIN = false;
-		}
-		
-	}
-	
-	//********************************************
-	//Reads in employee info
-	//********************************************
-	public static void EmployeeReader() throws IOException
-	{
-		int IdNumber = 100, Passcode,	EmployeeType;
-		employeeList = new Employee[0];
-		employeeSortList = new int[0];
-		boolean contID = true;
-		
-		
-		Scanner scan = new Scanner(new File("employees.dat"));
-		
-		//while(contID == true)
-		//{
-			IdNumber = scan.nextInt(); 
-			System.out.println("ID" + IdNumber);
-			IdNumber = scan.nextInt();
-			if (IdNumber == 0)
-					{
-						contID = false;
-					}
-			
-			Passcode = scan.nextInt();
-			System.out.println("Passcode" + Passcode);
-			
-			EmployeeType = scan.nextInt();
-			System.out.println("Type" + EmployeeType);
-			
-			//makes room for new account
-			Employee[] temp = new Employee[employeeList.length+1];
-				
-			for(int i = 0; i < employeeList.length; i++)
-			{
-				temp[i] = employeeList[i];
-			}
-				
-			employeeList = new Employee [temp.length];
-				
-			for(int i = 0; i < employeeList.length; i++)
-			{
-				employeeList[i] = temp[i];
-			}
-				
-			int[] tempS = new int[employeeSortList.length+1];
-				
-			for(int i = 0; i < employeeSortList.length; i++)
-			{
-				tempS[i] = employeeSortList[i];
-			}
-				
-			employeeSortList = new int[tempS.length];
-				
-			for(int i = 0; i < employeeSortList.length; i++)
-			{
-				employeeSortList[i] = tempS[i];
-			}
-			
-			employeeList[employeeList.length - 1] = new Employee(IdNumber, Passcode, EmployeeType);
-			
-			employeeSortList[employeeList.length - 1] = employeeList[employeeList.length - 1].getIdNumber();
-			
-			System.out.println("ID" + employeeList[employeeList.length - 1].getIdNumber());
-			System.out.println("Passcode" + employeeList[employeeList.length - 1].getPasscode());
-			System.out.println("Type" + employeeList[employeeList.length - 1].getEmployeeType());
-		//}
-	}
-	
-	//*******************************
-	//Compares the user enter passcode to check if passcode is correct or not
-	//*******************************
-	public static boolean checkPasscode(int p, int a)
-	{
-		int checkPass = a;
-		int checkIdNumber = p;
-		int correctPass;
-		int ID = 100;
-		
-		for(int i = 0; i < sortList.length; i++)
-		{
-			System.out.println(checkIdNumber);
-			System.out.println(employeeSortList[i]);
-			if (checkIdNumber == employeeSortList[i])
-			{
-				
-				ID = i;
-			}
-		}
-		
-		correctPass = employeeList[ID].getPasscode();
-		if (checkPass == correctPass)
-		{
-			return CorrectPassCode = true;
-		}
-		
-		else
-		{
-			return CorrectPassCode = false;
-		}
-		
-	}
-	
 }
