@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#in" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <BorderPane layoutX="76.0" layoutY="42.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="1064.0">
+         <top>
+            <AnchorPane prefHeight="42.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="295.0" layoutY="-28.0" text="New Checking">
+                     <font>
+                        <Font name="Comic Sans MS" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="43.0" prefWidth="436.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="NewCheckingBackButton" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#NewCheckingClickBack" text="Back" />
+                  <Button fx:id="NewCheckingEnterButton" layoutX="633.0" layoutY="9.0" mnemonicParsing="false" onAction="#NewCheckingClickEnter" text="Enter" />
+               </children>
+            </AnchorPane>
+         </bottom>
+         <center>
+            <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="986.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.5" minWidth="10.0" prefWidth="121.5" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0" minWidth="10.0" prefWidth="453.5" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="5.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Name:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="508.0" GridPane.columnIndex="1">
+                     <children>
+                        <TextField fx:id="NewCheckingName" layoutY="2.0" prefHeight="25.0" prefWidth="515.0" promptText="Last, First" />
+                        <Label fx:id="NewCheckingNameError" layoutY="39.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Address:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="NewCheckingAddress" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="514.0" promptText="# Street, City, State, Zip" />
+                        <Label fx:id="NewCheckingAddressError" layoutY="38.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Date of Birth:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="NewCheckingDOB" layoutY="2.0" prefHeight="25.0" prefWidth="515.0" promptText="##JAN####" />
+                        <Label fx:id="NewCheckingDOBError" layoutY="38.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Label layoutX="8.0" layoutY="6.0" text="Social Security Number:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="NewCheckingSSN" layoutY="2.0" prefHeight="25.0" prefWidth="515.0" promptText="#########" />
+                        <Label fx:id="NewCheckingSSNError" layoutY="38.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="91.0" prefWidth="449.0" GridPane.rowIndex="4">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="PIN Number:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <TextField fx:id="NewCheckingPIN" layoutY="2.0" prefHeight="25.0" prefWidth="515.0" promptText="####" />
+                        <Label fx:id="NewCheckingPINError" layoutY="38.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Starting Checking Balance:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="NewCheckingSCB" layoutY="2.0" prefHeight="25.0" prefWidth="515.0" promptText="###.##" />
+                        <Label fx:id="NewCheckingSCBError" layoutY="38.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Starting Savings Balance:" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <Label fx:id="NewCheckingSSBError" layoutY="29.0" />
+                        <TextField fx:id="NewCheckingSSB" layoutY="2.0" prefHeight="25.0" prefWidth="515.0" promptText="###.##" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
